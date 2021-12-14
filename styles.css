@@ -16,9 +16,13 @@
     text-shadow: yellowgreen;
 }
 .darkmode{
-    
+    background-color: black;
     color: white;
     
+}
+.lightmode{
+    background-color: white;
+    color: black;
 }
 img{
    
@@ -98,4 +102,12 @@ li:hover{
     color: grey;
     
     margin-bottom: 1rem;
+}
+.footer{
+    background-color: grey;
+    padding: 2rem;
+}
+.footer-info{
+    display: flex;
+    justify-content: center;
 }
