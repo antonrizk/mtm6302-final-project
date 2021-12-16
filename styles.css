@@ -4,9 +4,13 @@
 .body-container{
    
     margin: 0 auto;
-
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     
 }
+
 
 
 
@@ -16,12 +20,24 @@
     text-shadow: yellowgreen;
 }
 .darkmode{
-    background-color: black;
+    
     color: white;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-left: 15rem;
+    margin-right: 15rem;
+
+    background-color: rgba(0, 0, 0, 0.5);
     
 }
 .lightmode{
-    background-color: white;
+    
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-left: 15rem;
+    margin-right: 15rem;
+
+    background-color: rgba(255,255,255, 0.6);;
     color: black;
 }
 img{
@@ -55,7 +71,9 @@ h1{
     transform: translateX(-50px);
     transition: transform 0.5s;
 }
-
+a{
+    text-decoration: none;
+}
 li{
     
     list-style: none;

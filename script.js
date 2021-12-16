@@ -25,12 +25,9 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=J3gluZeQZefozV6XxyZRyImJznmmo
             document.querySelector('p').textContent = 'APOD is a video'
         } else {
             
-            document.querySelector('img').setAttribute('src', imageData.hdurl)
-            
-            // set attribute for background?
-            // document.querySelector('p').style(``) load in the image as  background it wont work so it wont be a background. 
-            
-            // anyway of fixing it
+           
+            document.querySelector('.body-container').setAttribute('style', `background-image: url(${imageData.hdurl});`)
+        
         }
     })
     
@@ -52,15 +49,12 @@ function clock(){
     let minute = now.getMinutes()
     let second = now.getSeconds()
     theClock.textContent = hour + ':' + minute + ':' + second 
-    setInterval(clock, 1000)
-
-    // adding if statment if the number is less then two digits add a 0 infront of it. 
-    // ===== not sure how to actually do this======
-    // if(minute > 10){
-    //     theClock =  '0' + minute
-    // }
 }
 clock()
+
+setInterval(function() {
+    clock()
+}, 1000);
 // ============================================================
  // setting the time as a global thing to call the greeting
 //======================================== =======================
@@ -104,23 +98,34 @@ displayDay.addEventListener('click', function(e){
 
 
 // adddin event listener so when this is clicked in the nav this styling appears. 
-clockDisplay.addEventListener('click', function(){
-    theClock.classList.add('neon')
-    // console.log(theClock)
-    // ====this event listner is not working and wont listen
+clockDisplay.addEventListener('click', function(e){
+   if(e.target = 'neon'){
+       theClock.classList.add('neon') 
+   }
+   else if (e.target = 'neon'){
+    theClock.classList.remove('neon') 
+   }
+   
+  
 })
 
 
 // setting up the click event for displaying dark mode styles. 
 darkMode.addEventListener('click', function(){
-    let neonColor = $dayInfo
+    
     $dayInfo.classList.add('darkmode')
     // ==== this is not working even console log wont pick it up not sure whats happening
 
  })
+
  lightMode.addEventListener('click', function(){
     
-    $dayInfo.classList.add('darkmode')
+    $dayInfo.classList.add('lightmode')
     
 
  })
+
+
+
+//  local storage stuff
+// still trying to undertand local storage stuff i dont know why i left it till last minute.
