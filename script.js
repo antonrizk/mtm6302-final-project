@@ -7,6 +7,58 @@ const displayDay = document.getElementById('today-info')
 let $dayInfo = document.getElementById('dayInfo')
 let theClock = document.getElementById('clock')
 let greeting = document.getElementById('greeting')
+
+const apod_explanation = document.getElementById('explanation');
+const apod_title = document.getElementById('title');
+const apod_copyright = document.getElementById('copyright')
+const apod_date = document.getElementById('date')
+
+
+
+
+// ==========================================
+// double click js
+// ==========================================
+
+const loveMe = document.querySelector('.api-img')
+const times = document.querySelector('#times')
+
+let clickTime = 0
+
+loveMe.addEventListener('click', function(e){
+    if(clickTime === 0 ){
+        clickTime = new Date().getTime()
+    }
+    else {
+        if((new Date().getTime() - clickTime) < 800){
+            // console.log(123)
+            createHeart(e)
+            clickTime = 0
+        }else{
+            clickTime = new Date().getTime()
+        }
+    }
+})
+const createHeart = (e) => {
+    const heart = document.createElement('i')
+    heart.classList.add('fas')
+    heart.classList.add('fa-heart')
+
+    const x = e.clientX
+    const y = e.clientY
+
+    const leftOffset = e.target.offsetLeft
+    const topOffset = e.target.offsetTop
+
+    const xInside = x - leftOffset
+    const yInside = y - topOffset
+
+    heart.style.top = `${yInside}px`
+    heart.style.left = `${xInside}px`
+
+    loveMe.appendChild(heart)
+}
+
 // ===================================================
 //  setting up the greeting based on time of the day
 // ===================================================
@@ -40,6 +92,7 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=J3gluZeQZefozV6XxyZRyImJznmmo
         return response.json()
     })
     .then(function (imageData){
+        
         console.log(imageData)
 
         if (imageData.media_type === 'video'){
@@ -47,9 +100,15 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=J3gluZeQZefozV6XxyZRyImJznmmo
         } else {
             
            
-            document.querySelector('.body-container').setAttribute('style', `background-image: url(${imageData.hdurl});`)
-        
+            document.querySelector('.api-img').setAttribute('style', `background-image: url(${imageData.hdurl});`)
+       
         }
+        
+        apod_title.innerHTML = imageData.title
+        apod_explanation.innerHTML = imageData.explanation
+        apod_copyright.innerHTML = imageData.copyright
+        apod_date.innerHTML = imageData.date
+        
     })
     
 
@@ -77,6 +136,8 @@ setInterval(function() {
     clock()
 }, 1000);
 
+
+
 // ===========================================
 // set up event listener to display the time. 
 // ============================================
@@ -88,10 +149,8 @@ displayDay.addEventListener('click', function(e){
     if($dayInfo.textContent = []){
         $dayInfo.textContent = [year, month, day]
     }
-    // else if ($dayInfo.textContent = []){
-    //     $dayInfo.textContent = []
-    // }
-    // console.log(day)
+    
+   
 
    
 })
